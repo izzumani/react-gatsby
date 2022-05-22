@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from "gatsby"
+import {Link, graphql} from "gatsby"
 //import StyleWrapper from "../components/StyleWrapper"
 // import styled from "styled-components"
 import Layout from "../components/Layout"
@@ -15,16 +15,26 @@ import Layout from "../components/Layout"
 // color: #fff
 // }
 // )'
-const Index = () => {
+export  default function Index  ({data})  {
+const {
+    site: {
+        siteMetadata: {name, role},
+    }
+} = data
 
+// let name ="Isaac Njiru"
+// let role ="Senior Software Engineer"
     
     return (
         <div>
             {/*<StyleWrapper>*/}
             <Layout>
-                <h1 >My Landing Page</h1>
-                <p>This is my landing page.</p>
-                <Link to="/about">About Me</Link>
+                <div className="max-w-5xl mx-auto py-16 lg:py-24">
+                    <h1 className="text-4xl md:text-6xl font-bold text-black pb-4">{name}</h1>
+                    <p className="mb-4">{role}</p>
+                    <Link to="/about" className="btn">About Me</Link>
+                </div>
+                
             </Layout>
                 
             {/*</StyleWrapper>*/}
@@ -33,4 +43,13 @@ const Index = () => {
     )
 }
 
-export default Index
+ export const query = graphql`
+ {
+     site {
+         siteMetadata {
+             name
+             role
+         }
+     }
+ }
+ `; 

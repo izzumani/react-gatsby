@@ -1,3 +1,4 @@
+require("dotenv").config()
 module.exports = {
 	siteMetadata:{
 		siteUrl: 'https://mywebsite:8000/',
@@ -10,6 +11,7 @@ module.exports = {
 	'gatsby-plugin-mdx',
     'gatsby-plugin-postcss',
 	'gatsby-transformer-remark',
+	'gatsby-plugin-image',
 	{
 		resolve: 'gatsby-source-filesystem',
 		options: {
@@ -18,7 +20,13 @@ module.exports = {
 			// name: 'mdx-bio',
 			// path: `${__dirname}/MDX`,
 		}
-	}
+	},
+	{
+		resolve: 'gatsby-source-graphcms',
+		options: {
+		endpoint: process.env.GRAPHCMS_ENDPOINT,
+		},
+		},
 	],
 
 	// plugins: ['gatsby-plugin-styled-components']
